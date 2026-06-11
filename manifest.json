@@ -1,0 +1,175 @@
+{
+  "$schema": "https://schemas.botframework.com/schemas/skills/skill-manifest-2.1.preview-0.json",
+  "$id": "NutritionAdvisorSkill",
+  "name": "Nutrition Advisor",
+  "version": "1.0.0",
+  "description": "Nutrition and meal planning assistant. Provides personalised meal recommendations, calorie estimates, healthy food alternatives, and daily nutrition tips.",
+  "publisherName": "Nutrition Advisor",
+  "privacyUrl": "https://nutrition-advisor.onrender.com/privacy",
+  "copyright": "Copyright (c) 2025",
+  "license": "",
+  "iconUrl": "https://nutrition-advisor.onrender.com/icon.png",
+  "tags": [
+    "nutrition",
+    "health",
+    "meal",
+    "calories",
+    "diet"
+  ],
+  "endpoints": [
+    {
+      "name": "production",
+      "protocol": "BotFrameworkV3",
+      "description": "Production endpoint for Nutrition Advisor Skill",
+      "endpointUrl": "https://nutrition-advisor.onrender.com/api/messages",
+      "msAppId": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "dispatchModels": {
+    "languages": {
+      "en-us": [
+        {
+          "id": "NutritionAdvisorLuisModel",
+          "name": "Nutrition Advisor LUIS Model",
+          "contentType": "application/lu",
+          "url": "https://nutrition-advisor.onrender.com/manifests/nutrition-advisor-en-us.lu",
+          "description": "English language model for Nutrition Advisor"
+        }
+      ]
+    },
+    "intents": [
+      "GetMealRecommendation",
+      "EstimateCalories",
+      "GetHealthyAlternative",
+      "GetNutritionTip"
+    ]
+  },
+  "activities": {
+    "getMealRecommendation": {
+      "description": "Returns a personalised meal suggestion based on diet type and health goal",
+      "type": "event",
+      "name": "GetMealRecommendation",
+      "value": {
+        "$ref": "#/definitions/MealRecommendationInput"
+      },
+      "resultValue": {
+        "$ref": "#/definitions/MealRecommendationOutput"
+      }
+    },
+    "estimateCalories": {
+      "description": "Estimates the calorie count for a described food item or meal",
+      "type": "event",
+      "name": "EstimateCalories",
+      "value": {
+        "$ref": "#/definitions/CalorieEstimatorInput"
+      },
+      "resultValue": {
+        "$ref": "#/definitions/CalorieEstimatorOutput"
+      }
+    },
+    "getHealthyAlternative": {
+      "description": "Suggests a healthier alternative to a given food item",
+      "type": "event",
+      "name": "GetHealthyAlternative",
+      "value": {
+        "$ref": "#/definitions/HealthyAlternativeInput"
+      },
+      "resultValue": {
+        "$ref": "#/definitions/HealthyAlternativeOutput"
+      }
+    },
+    "getNutritionTip": {
+      "description": "Returns a random daily nutrition tip",
+      "type": "event",
+      "name": "GetNutritionTip",
+      "resultValue": {
+        "$ref": "#/definitions/NutritionTipOutput"
+      }
+    }
+  },
+  "definitions": {
+    "MealRecommendationInput": {
+      "type": "object",
+      "required": ["dietType", "goal"],
+      "properties": {
+        "dietType": {
+          "type": "string",
+          "description": "Type of diet, e.g. vegetarian, vegan, non-vegetarian, keto",
+          "example": "vegetarian"
+        },
+        "goal": {
+          "type": "string",
+          "description": "Health goal, e.g. weight loss, muscle gain, maintenance, diabetes control",
+          "example": "weight loss"
+        }
+      }
+    },
+    "MealRecommendationOutput": {
+      "type": "object",
+      "properties": {
+        "mealSuggestion": {
+          "type": "string",
+          "description": "Recommended meal description",
+          "example": "Paneer salad with cucumber and sprouts"
+        },
+        "estimatedCalories": {
+          "type": "integer",
+          "description": "Estimated calorie count for the suggested meal",
+          "example": 350
+        }
+      }
+    },
+    "CalorieEstimatorInput": {
+      "type": "object",
+      "required": ["foodItem"],
+      "properties": {
+        "foodItem": {
+          "type": "string",
+          "description": "Description of the food item or meal",
+          "example": "2 rotis and dal"
+        }
+      }
+    },
+    "CalorieEstimatorOutput": {
+      "type": "object",
+      "properties": {
+        "estimatedCalories": {
+          "type": "integer",
+          "description": "Estimated calorie count",
+          "example": 420
+        }
+      }
+    },
+    "HealthyAlternativeInput": {
+      "type": "object",
+      "required": ["foodItem"],
+      "properties": {
+        "foodItem": {
+          "type": "string",
+          "description": "Food item for which to find a healthy substitute",
+          "example": "potato chips"
+        }
+      }
+    },
+    "HealthyAlternativeOutput": {
+      "type": "object",
+      "properties": {
+        "alternative": {
+          "type": "string",
+          "description": "Healthier alternative suggestion",
+          "example": "roasted makhana (fox nuts)"
+        }
+      }
+    },
+    "NutritionTipOutput": {
+      "type": "object",
+      "properties": {
+        "tip": {
+          "type": "string",
+          "description": "A daily nutrition tip",
+          "example": "Drink water before meals to improve satiety."
+        }
+      }
+    }
+  }
+}
