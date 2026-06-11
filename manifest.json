@@ -21,7 +21,7 @@
       "name": "production",
       "protocol": "BotFrameworkV3",
       "description": "Production endpoint for Nutrition Advisor Skill",
-      "endpointUrl": "https://nutrition-advisor.onrender.com/api/messages",
+      "endpointUrl": "https://nutrition-advisor-n13q.onrender.com/api/messages",
       "msAppId": "00000000-0000-0000-0000-000000000000"
     }
   ],
@@ -32,7 +32,7 @@
           "id": "NutritionAdvisorLuisModel",
           "name": "Nutrition Advisor LUIS Model",
           "contentType": "application/lu",
-          "url": "https://nutrition-advisor.onrender.com/manifests/nutrition-advisor-en-us.lu",
+          "url": "https://nutrition-advisor-n13q.onrender.com/manifests/nutrition-advisor-en-us.lu",
           "description": "English language model for Nutrition Advisor"
         }
       ]
